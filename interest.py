@@ -1,10 +1,11 @@
 '''
 interest calculator
+By: Michael Asnes
 '''
 import sys, getopt
 
-DEFAULT_INTEREST_RATE = 1.03
-DEFAULT_COMPOUND_RATE = 1.07
+DEFAULT_INFLATION_RATE = 1.03
+DEFAULT_INTEREST_RATE = 1.07
 DEFAULT_STARTING_CONTRIBUTION = 0
 DEFAULT_YEARLY_CONTRIBUTION = 10000
 DEFAULT_YEARS_OF_CONTRIBUTION = 40
@@ -15,16 +16,17 @@ DEFAULT_NUM_MULTIPLIERS = 3
 def usage():
     ''' print usage info '''
     print(''' Usage:
+          -h show this help
           -s starting contribution (defaults to {:,})
-          -i (float >= 1.00) interest rate (defaults to {})
-          -o (float >= 1.00) compound rate (defaults to {})
+          -i (float >= 1.00) inflation rate (defaults to {})
+          -o (float >= 1.00) interest rate (defaults to {})
           -c yearly contribution (defaults to {:,})
           -n years of contribution (defaults to {})
           -r years till retirement (defaults to {})
           -m show how much your investments multiply over each of
              [num] periods of time over your investment (off by default)
-          '''.format(DEFAULT_STARTING_CONTRIBUTION, DEFAULT_INTEREST_RATE,
-                     DEFAULT_COMPOUND_RATE, DEFAULT_YEARLY_CONTRIBUTION,
+          '''.format(DEFAULT_STARTING_CONTRIBUTION, DEFAULT_INFLATION_RATE,
+                     DEFAULT_INTEREST_RATE, DEFAULT_YEARLY_CONTRIBUTION,
                      DEFAULT_YEARS_OF_CONTRIBUTION,
                      DEFAULT_YEARS_TILL_RETIREMENT))
 
@@ -36,8 +38,8 @@ def process_opts():
         print(str(err)) # will print something like "option -a not recognized"
         usage()
         sys.exit(2)
+    inflation_rate = DEFAULT_INFLATION_RATE
     interest_rate = DEFAULT_INTEREST_RATE
-    compound_rate = DEFAULT_COMPOUND_RATE
     starting_contribution = DEFAULT_STARTING_CONTRIBUTION
     yearly_contribution = DEFAULT_YEARLY_CONTRIBUTION
     years_of_contribution = DEFAULT_YEARS_OF_CONTRIBUTION
@@ -51,9 +53,9 @@ def process_opts():
         elif o == "-s":
             starting_contribution = int(a)
         elif o == "-o":
-            compound_rate = float(a)
-        elif o == "-i":
             interest_rate = float(a)
+        elif o == "-i":
+            inflation_rate = float(a)
         elif o == "-c":
             yearly_contribution = int(a)
         elif o == "-n":
@@ -66,14 +68,14 @@ def process_opts():
         else:
             assert False, "unhandled option"
 
-    return (starting_contribution, interest_rate, compound_rate,
+    return (starting_contribution, inflation_rate, interest_rate,
             yearly_contribution, years_of_contribution, years_till_retirement,
             show_multipliers, num_multipliers)
 
 
-def compound(start, compound_rate, years_to_compound):
+def compound(start, interest_rate, years_to_compound):
     for _ in range(years_to_compound):
-        start *= compound_rate
+        start *= interest_rate
     return start
 
 def get_multipliers(num_multipliers, net_interest_rate, years_of_contribution,
@@ -102,11 +104,11 @@ def get_retirement_funds(starting_contribution, net_interest_rate,
     return compound
 
 def main():
-    (starting_contribution, interest_rate, compound_rate,
+    (starting_contribution, inflation_rate, interest_rate,
      yearly_contribution, years_of_contribution, years_till_retirement,
      show_multipliers, num_multipliers) = process_opts()
 
-    net_interest_rate = compound_rate - interest_rate + 1
+    net_interest_rate = interest_rate - inflation_rate + 1
 
     retirement_fund = get_retirement_funds(starting_contribution,
                                            net_interest_rate,
@@ -115,12 +117,12 @@ def main():
                                            years_till_retirement)
     print("""Assuming
     A starting contribution of ${:,}
+    An inflation rate of {}
     An interest rate of {}
-    A compound rate of {}
     A yearly contribution of ${:,}
     {} years of contribution
     and {} years till retirement
-          """.format(starting_contribution, interest_rate, compound_rate,
+          """.format(starting_contribution, inflation_rate, interest_rate,
                      yearly_contribution, years_of_contribution,
                      years_till_retirement))
 
@@ -141,7 +143,6 @@ def main():
     print("You will retire with the equivalent of",
           "${:,.2f} in today's currency".format(retirement_fund))
     print("")
-
 
 
 if __name__ == '__main__':
