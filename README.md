@@ -9,6 +9,7 @@ $ python interest.py
 ```
 
 Optional arguments:
+```
     -h show this help
     -s starting contribution (defaults to 0)
     -i (float >= 1.00) inflation rate (defaults to 1.03)
@@ -18,6 +19,7 @@ Optional arguments:
     -r years till retirement (defaults to 40)
     -m show how much your investments multiply over each of
        [num] periods of time over your investment (off by default)
+```
 
 
 #### Examples:
