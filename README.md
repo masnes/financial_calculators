@@ -32,8 +32,8 @@ $ python interest.py
 ###### Run the calculator with some options:
 
 * A starting contribution of $50,000
-* An inflation rate of 1.03
-* An interest rate of 1.07
+* The default inflation rate of 1.03
+* An interest rate of 1.08
 * A yearly contribution of $10,000
 * 15 years of contribution
 * and 30 years till retirement
@@ -42,7 +42,7 @@ While showing how much your money multiplies by if you invest it
 at (4) different periods in time over your 15 years of contribution.
 
 ```bash
-$ python interest.py -s 50000 -o 1.07 -c 10000 -n 15 -r 30 -m 4 
+$ python interest.py -s 50000 -o 1.08 -c 10000 -n 15 -r 30 -m 4 
 ```
 
 ##### Disclaimers
