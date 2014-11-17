@@ -120,7 +120,7 @@ def main():
                                            yearly_contribution,
                                            years_of_contribution,
                                            years_till_retirement)
-    print("""Assuming
+    print("""Assuming:
     A starting contribution of ${:,}
     An inflation rate of {}
     An interest rate of {}
