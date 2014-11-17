@@ -22,11 +22,13 @@ Optional arguments:
 
 #### Examples:
 
+###### 1
 Run the calculator with defaults:
 ```bash
 $ python interest.py
 ```
 
+###### 2
 Run the calculator with:
 
 * A starting contribution of $50,000
@@ -36,10 +38,13 @@ Run the calculator with:
 * 15 years of contribution
 * and 30 years till retirement
 
-while showing how much your money multiplies by at 4 periods over the time you invest
+While showing how much your money multiplies by at 4 periods over the time you invest
 
 ```bash
 $ python interest.py -s 50000 -o 1.07 -c 10000 -n 15 -r 30 -m 4 
 ```
 
-This program is not well hardened against improper input
+##### Disclaimers
+This program is not well hardened against improper input. 
+
+It has also not been well tested. Use for estimation purposes only.
