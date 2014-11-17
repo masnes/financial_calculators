@@ -21,8 +21,8 @@ def usage():
           -c yearly contribution (defaults to {:,})
           -n years of contribution (defaults to {})
           -r years till retirement (defaults to {})
-          -m [num] show multipliers (how much your investments multiply over
-             each of [num] periods of your investment) (off by default)
+          -m show how much your investments multiply over each of
+             [num] periods of time over your investment (off by default)
           '''.format(DEFAULT_STARTING_CONTRIBUTION, DEFAULT_INTEREST_RATE,
                      DEFAULT_COMPOUND_RATE, DEFAULT_YEARLY_CONTRIBUTION,
                      DEFAULT_YEARS_OF_CONTRIBUTION,
