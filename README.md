@@ -34,7 +34,7 @@ $ python interest.py
 * A starting contribution of $50,000
 * The default inflation rate of 1.03
 * An interest rate of 1.08
-* A yearly contribution of $10,000
+* A yearly contribution of $10,000 (same as the default, but specified in the arguments)
 * 15 years of contribution
 * and 30 years till retirement
 
