@@ -22,14 +22,12 @@ Optional arguments:
 
 #### Examples:
 
-###### 1
-Run the calculator with defaults:
+###### Run the calculator with defaults:
 ```bash
 $ python interest.py
 ```
 
-###### 2
-Run the calculator with:
+###### Run the calculator with some options:
 
 * A starting contribution of $50,000
 * An inflation rate of 1.03
@@ -38,7 +36,8 @@ Run the calculator with:
 * 15 years of contribution
 * and 30 years till retirement
 
-While showing how much your money multiplies by at 4 periods over the time you invest
+While showing how much your money multiplies by if you invest it 
+at (4) different periods in time over your 15 years of contribution.
 
 ```bash
 $ python interest.py -s 50000 -o 1.07 -c 10000 -n 15 -r 30 -m 4 
