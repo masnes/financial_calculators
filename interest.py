@@ -13,6 +13,7 @@ DEFAULT_YEARS_TILL_RETIREMENT = 40
 DEFAULT_SHOW_MULTIPLIERS = False
 DEFAULT_NUM_MULTIPLIERS = 3
 
+
 def usage():
     ''' print usage info '''
     print(''' Usage:
@@ -29,6 +30,7 @@ def usage():
                      DEFAULT_INTEREST_RATE, DEFAULT_YEARLY_CONTRIBUTION,
                      DEFAULT_YEARS_OF_CONTRIBUTION,
                      DEFAULT_YEARS_TILL_RETIREMENT))
+
 
 def process_opts():
     try:
@@ -78,6 +80,7 @@ def compound(start, interest_rate, years_to_compound):
         start *= interest_rate
     return start
 
+
 def get_multipliers(num_multipliers, net_interest_rate, years_of_contribution,
                     years_till_retirement):
     period_length = years_of_contribution // (num_multipliers-1)
@@ -93,6 +96,7 @@ def get_multipliers(num_multipliers, net_interest_rate, years_of_contribution,
 
     return multipliers_list
 
+
 def get_retirement_funds(starting_contribution, net_interest_rate,
                          yearly_contribution, years_of_contribution,
                          years_till_retirement):
@@ -102,6 +106,7 @@ def get_retirement_funds(starting_contribution, net_interest_rate,
         if i < years_of_contribution:
             compound += yearly_contribution
     return compound
+
 
 def main():
     (starting_contribution, inflation_rate, interest_rate,
