@@ -43,6 +43,8 @@ class CagrCalc(object):
                      "You made no money, from no money.")
         elif self.begginning_value == 0:
             sys.exit("Your returns were infinite")
+        elif self.num_periods == 0:
+            sys.exit("Growth doesn't make sense over 0 periods")
 
 def main():
     cagr_calc = CagrCalc(*process_opts())
