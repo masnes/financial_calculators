@@ -124,9 +124,8 @@ class CompoundingCalculator(object):
         print("    You'll have a net compounding rate of {}\n".format(self.net_compounding_rate))
 
     def print_money_contributed(self):
-        money_contributed = self.money_contributed()
         print("")
-        print("You will put in a total of ${:,.2f}".format(money_contributed))
+        print("You will put in a total of ${:,.2f}".format(self.money_contributed))
 
     def print_retirement_amount(self):
         print("You will retire with the equivalent of",
