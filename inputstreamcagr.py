@@ -52,7 +52,7 @@ class InputStreamCagr(object):
         self.begginning_value = float(begginning_value)
         self.ending_value = float(ending_value)
         self.contribution_per_period = float(contribution_per_period)
-        self.num_periods = float(num_periods)
+        self.num_periods = int(num_periods)
 
     def money_contributed(self):
         yearly_contribution_net = self.contribution_per_period * (self.num_periods - 1)
