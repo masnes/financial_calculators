@@ -125,7 +125,7 @@ class CompoundingCalculator(object):
 
     def print_money_contributed(self):
         print("")
-        print("You will put in a total of ${:,.2f}".format(self.money_contributed))
+        print("You will put in a total of ${:,.2f}".format(self.money_contributed()))
 
     def print_retirement_amount(self):
         print("You will retire with the equivalent of",
