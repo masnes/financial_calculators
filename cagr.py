@@ -75,6 +75,65 @@ class InputStreamCagr(object):
         self.contribution_per_period = float(contribution_per_period)
         self.num_periods = float(num_periods)
 
+    def money_contributed(self):
+        yearly_contribution_net = self.contribution_per_period * (self.num_periods - 1)
+        return yearly_contribution_net + self.begginning_value
+
+    def approximate_growth_rate(self, allowable_error):
+        min_rate, max_rate = self._get_bounds_on_growth_rate(allowable_error)
+        assert isinstance(min_rate, float) and isinstance(max_rate, float)
+
+        mid_rate = (max_rate - min_rate) / 2 + min_rate
+        return_at_mid_rate = self._calculate_return_at_rate(mid_rate)
+        while abs(return_at_mid_rate - self.ending_value) > allowable_error:
+            if return_at_mid_rate > self.ending_value:
+                max_rate = mid_rate
+            else:
+                min_rate = mid_rate
+            mid_rate = (max_rate - min_rate) / 2 + min_rate
+            return_at_mid_rate = self._calculate_return_at_rate(mid_rate)
+        approximate_growth_rate = mid_rate
+        return approximate_growth_rate
+
+
+    def _get_bounds_on_growth_rate(self, allowable_error):
+        """ Returns: (min_rate, max_rate) """
+        min_rate = None
+        max_rate = None
+
+        if self.ending_value < self.money_contributed():
+            print("Warning, money shrank. The program cannot handle this")
+            return None, 1.00
+
+        guess_rate = 1.05
+        return_at_rate = self._calculate_return_at_rate(guess_rate)
+        if abs(return_at_rate - self.ending_value) <= allowable_error:
+            min_rate = max_rate = guess_rate
+            return min_rate, max_rate
+        elif return_at_rate > self.ending_value:
+            max_rate = guess_rate
+            min_rate = 1.00
+            return min_rate, max_rate
+        else:   # return_at_rate < self.ending_value
+            while return_at_rate <= self.ending_value:
+                min_rate = guess_rate
+                guess_rate = double_rate(guess_rate)
+                return_at_rate = self._calculate_return_at_rate(guess_rate)
+            max_rate = guess_rate
+            return min_rate, max_rate
+
+    def _calculate_return_at_rate(self, rate):
+        compounded_beg_val = self.begginning_value * (rate ** self.num_periods)
+
+        contribution_accumulator = self.contribution_per_period
+        for _ in range(self.num_periods - 1):
+            contribution_accumulator += self.contribution_per_period
+            contribution_accumulator *= rate
+        return contribution_accumulator + compounded_beg_val
+
+
+def double_rate(rate):
+    return ((rate - 1.0) * 2) + 1
 
 
 def main():
