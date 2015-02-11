@@ -106,8 +106,8 @@ class InputStreamCagr(object):
 
         contribution_accumulator = self.contribution_per_period
         for _ in range(self.num_periods - 1):
-            contribution_accumulator += self.contribution_per_period
             contribution_accumulator *= rate
+            contribution_accumulator += self.contribution_per_period
         return contribution_accumulator + compounded_beg_val
 
 
