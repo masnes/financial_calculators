@@ -49,6 +49,23 @@ class CagrCalc(object):
 class InputStreamCagr(object):
     """ Cagr is easy. But what if you've been investing a constant stream
     of money over x periods?
+
+    To derive this, you need to solve the following equation for r:
+        r = compounding rate (ex: 1.07 for a 7% / period return)
+        s = starting value
+        e = ending value
+        c = yearly contribution value
+        n = number of periods
+        e = sum_{i=0}^{n-1}(c * r^i) + (s * r^n)
+
+        Explained:
+            The starting value compounds n times, giving us (s * r^n)
+            The first periodic contribution will compound n-1 times (all times
+            except the first period), the second will compound n-2 times,
+            ... until the last one which doesn't compound.
+
+    This is beyond my current mathematical knowledge. However,
+    I can use a variant on binary search to approximate r.
     """
 
     def __init__(self, begginning_value, ending_value,
