@@ -117,7 +117,7 @@ class CompoundingCalculator(object):
         print("""Assuming:
         A starting contribution of ${:,}
         An inflation rate of {}
-        An compounding rate of {}
+        A compounding rate of {}
         A yearly contribution of ${:,}
         {} years of contribution
         and {} years till retirement
