@@ -46,6 +46,20 @@ class CagrCalc(object):
         elif self.num_periods == 0:
             sys.exit("Growth doesn't make sense over 0 periods")
 
+class InputStreamCagr(object):
+    """ Cagr is easy. But what if you've been investing a constant stream
+    of money over x periods?
+    """
+
+    def __init__(self, begginning_value, ending_value,
+                 contribution_per_period, num_periods):
+        self.begginning_value = float(begginning_value)
+        self.ending_value = float(ending_value)
+        self.contribution_per_period = float(contribution_per_period)
+        self.num_periods = float(num_periods)
+
+
+
 def main():
     cagr_calc = CagrCalc(*process_opts())
     cagr = cagr_calc.cagr()
