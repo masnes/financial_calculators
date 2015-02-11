@@ -8,7 +8,7 @@ def usage():
     print(
         '''Usage:
 \t-h show this help
-\t<Beginning Value>, <Ending Value>, <Contributions per period>,
+\t<Beginning Value>, <Ending Value>, <Contribution per period>,
 \t<Number of Periods>'''
     )
 
