@@ -99,15 +99,12 @@ class CompoundingCalculator(object):
 
     def get_multipliers(self):
         period_length = self.years_of_contribution // (self.num_multipliers-1)
-
         multipliers_list = []
-
         for n in range(0, self.num_multipliers):
             years_used = n * period_length
             multiplier = compound(1, self.net_compounding_rate, self.years_till_retirement - years_used)
             muliplier_package = (multiplier, years_used)
             multipliers_list.append(muliplier_package)
-
         return multipliers_list
 
     def money_contributed(self):
@@ -124,7 +121,6 @@ class CompoundingCalculator(object):
             """.format(self.starting_contribution, self.inflation_rate,
                        self.compounding_rate, self.yearly_contribution,
                        self.years_of_contribution, self.years_till_retirement))
-
         print("    You'll have a net compounding rate of {}\n".format(self.net_compounding_rate))
 
     def print_money_contributed(self):
@@ -134,7 +130,7 @@ class CompoundingCalculator(object):
 
     def print_retirement_amount(self):
         print("You will retire with the equivalent of",
-            "${:,.2f} in today's currency".format(self.get_retirement_funds()))
+              "${:,.2f} in today's currency".format(self.get_retirement_funds()))
         print("")
 
     def print_multipliers(self):
@@ -145,7 +141,6 @@ class CompoundingCalculator(object):
             years = multiplier_package[1]
             print("    {:5.2f} times if you invest it".format(multiple),
                   "{:2} years after the start of your retirement savings".format(years))
-
 
 def compound(start, compounding_rate, years_to_compound):
     for _ in range(years_to_compound):
