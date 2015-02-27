@@ -6,7 +6,7 @@ import sys
 
 def usage():
     sys.exit("""Usage:
-\tpython net_increase.py <rate of increase> <periods>""")
+\tpython net_increase.py <Rate of Increase> <Periods>""")
 
 def main():
     try:
