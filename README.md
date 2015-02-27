@@ -84,4 +84,6 @@ You will retire with the equivalent of $664,699.96 in today's currency
 ##### Disclaimers
 This program is not well hardened against improper input.
 
-It has also not been well tested. Use for estimation purposes only.
+It has also not been well tested. It seems reliable enough to me, but I make
+no promises. Definitely double check these values before using them to make
+important life decisions.
