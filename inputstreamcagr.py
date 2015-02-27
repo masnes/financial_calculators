@@ -118,6 +118,8 @@ def float_to_percent(double):
     return (double - 1.00) * 100
 
 def main():
+    inflation_rate = 1.03
+    inflation_rate_percent = float_to_percent(inflation_rate)
     isc = InputStreamCagr(*process_opts())
     acceptable_error = abs(isc.ending_value / 1000)
     approximate_growth_rate = isc.approximate_growth_rate(acceptable_error)
