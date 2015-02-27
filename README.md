@@ -1,8 +1,60 @@
-### Interest Calculator
+# Financial Calculators
 
-This program is an interest calculator / retirement calculator
+ * CAGR Calculator
+ * Input Stream CAGR Calculator
+ * Net Increase Calculator
+ * Retirement Calculator
 
-To run it:
+### CAGR Calculator
+
+CAGR, or Compounding Annual Growth Rate, is a way to measure how fast
+a contribution has compounded over a given time. For instance, if you
+start with 10,000 of something (money, mice, self-replicating robots,
+etc.) now, and that quantity becomes 20,000 10 periods, then the quantity
+grew by 7.18% per period. Compounding growth is very powerful!
+
+Usage:
+
+```bash
+python cagr.py <Beginning Value> <Ending Value> <Number of Periods>
+```
+
+This program works based on the following equation:
+
+(ending\_value / begginning\_value)^(1 / number\_of\_periods) - 1
+
+### Input Stream Cagr
+
+CAGR is simple enough. However, what if you started with 10,000 of something,
+then added an additional amount per year (say 1,000 more). This happens a lot
+with money and retirement accounts. It then becomes much more difficult to
+determine. This program will estimate the average yearly return with a high
+degree of accuracy (should be accurate to +/- 0.01% for most usage cases).
+
+Usage:
+
+```bash
+python inputstreamcagr.py <Beginning Value> <Ending Value> <Contribution per period> <Number of Periods>
+```
+
+### Net Increase Calculator
+
+Calculates the multiple of increase given a compounding rate and number of
+periods. For instance if something compounds at a rate of 7% per period for
+40 periods, it will increase a total of 14.97 times.
+
+Usage:
+```bash
+python net_increase.py <Rate of Increase> <Periods>
+```
+
+### Retirement Calculator
+
+This program is an interest calculator / retirement calculator. It takes in a
+lot of variables described below. It's built with sensible defaults, but all
+parameters can be tweaked as desired.
+
+To run it (with defaults):
 
 ```bash
 $ python interest.py
@@ -19,14 +71,6 @@ Optional arguments:
     -r years till retirement (defaults to 40)
     -m show how much your investments multiply over each of
        [num] periods of time over your investment (off by default)
-```
-
-
-#### Examples:
-
-##### Run the calculator with defaults:
-```bash
-$ python interest.py
 ```
 
 ###### Output:
