@@ -50,7 +50,7 @@ python net_increase.py <Rate of Increase> <Periods>
 
 ### Retirement Calculator
 
-This program is an interest calculator / retirement calculator. It takes in a
+This program is an compounding calculator / retirement calculator. It takes in a
 lot of variables described below. It's built with sensible defaults, but all
 parameters can be tweaked as desired.
 
@@ -65,7 +65,7 @@ Optional arguments:
     -h show this help
     -s starting contribution (defaults to 0)
     -i (float >= 1.00) inflation rate (defaults to 1.03)
-    -o (float >= 1.00) interest rate (defaults to 1.10)
+    -o (float >= 1.00) compounding rate (defaults to 1.10)
     -c yearly contribution (defaults to 10,000)
     -n years of contribution (defaults to 40)
     -r years till retirement (defaults to 40)
@@ -78,12 +78,12 @@ Optional arguments:
 Assuming:
     A starting contribution of $0
     An inflation rate of 1.03
-    An interest rate of 1.07
+    An compounding rate of 1.07
     A yearly contribution of $10,000
     40 years of contribution
     and 40 years till retirement
 
-    You'll have a net interest rate of 1.04
+    You'll have a net compounding rate of 1.04
 
 
 You will retire with the equivalent of $950,255.16 in today's currency
@@ -93,7 +93,7 @@ You will retire with the equivalent of $950,255.16 in today's currency
 
 * A starting contribution of $50,000
 * The default inflation rate of 1.03
-* An interest rate of 1.08
+* An compounding rate of 1.08
 * A yearly contribution of $10,000 (same as the default, but specified in the arguments)
 * 15 years of contribution
 * and 30 years till retirement
@@ -102,19 +102,19 @@ While showing how much your money multiplies by if you invest it
 at (4) different periods in time over your 15 years of contribution.
 
 ```bash
-$ python interest.py -s 50000 -o 1.08 -c 10000 -n 15 -r 30 -m 4
+$ python compounding.py -s 50000 -o 1.08 -c 10000 -n 15 -r 30 -m 4
 ```
 ###### Output:
 ```
 Assuming:
     A starting contribution of $50,000
     An inflation rate of 1.03
-    An interest rate of 1.08
+    An compounding rate of 1.08
     A yearly contribution of $10,000
     15 years of contribution
     and 30 years till retirement
 
-    You'll have a net interest rate of 1.05
+    You'll have a net compounding rate of 1.05
 
 Your money will multiply by:
      4.32 times if you invest it  0 years after the start of your retirement savings
