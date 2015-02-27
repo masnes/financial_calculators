@@ -57,7 +57,7 @@ parameters can be tweaked as desired.
 To run it (with defaults):
 
 ```bash
-$ python interest.py
+$ python retirement.py
 ```
 
 Optional arguments:

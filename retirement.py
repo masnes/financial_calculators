@@ -1,5 +1,5 @@
 '''
-compounding calculator
+Retirement calculator
 By: Michael Asnes
 '''
 import sys, getopt
