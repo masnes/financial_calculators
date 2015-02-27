@@ -13,7 +13,7 @@ Optional arguments:
     -h show this help
     -s starting contribution (defaults to 0)
     -i (float >= 1.00) inflation rate (defaults to 1.03)
-    -o (float >= 1.00) interest rate (defaults to 1.07)
+    -o (float >= 1.00) interest rate (defaults to 1.10)
     -c yearly contribution (defaults to 10,000)
     -n years of contribution (defaults to 40)
     -r years till retirement (defaults to 40)
