@@ -126,7 +126,13 @@ def main():
     approximate_growth_rate_percent = float_to_percent(approximate_growth_rate)
     print("Money grew at an approximate growth rate of: {:.2f}%"\
           .format(approximate_growth_rate_percent))
-
+    print("Assuming an inflation rate of {:.2f}%, this would cut real growth down "
+          "to {:.2f}%, or require a real growth rate of {:.2f}% to maintain "
+          "this value after inflation".format(inflation_rate_percent,
+                                              approximate_growth_rate_percent -
+                                              inflation_rate_percent,
+                                              approximate_growth_rate_percent +
+                                              inflation_rate_percent))
 
 if __name__ == "__main__":
     main()
