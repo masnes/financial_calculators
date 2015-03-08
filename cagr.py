@@ -17,31 +17,31 @@ def process_opts():
         if arg == '-h' or arg == '--help':
             sys.exit(usage())
     try:
-        begginning_value = sys.argv[1]
+        beginning_value = sys.argv[1]
         ending_value = sys.argv[2]
         num_periods = sys.argv[3]
     except IndexError:
         sys.exit(usage())
-    return begginning_value, ending_value, num_periods
+    return beginning_value, ending_value, num_periods
 
 class CagrCalc(object):
-    def __init__(self, begginning_value, ending_value, num_periods):
-        self.begginning_value = float(begginning_value)
+    def __init__(self, beginning_value, ending_value, num_periods):
+        self.beginning_value = float(beginning_value)
         self.ending_value = float(ending_value)
         self.num_periods = float(num_periods)
 
     def get_parameters(self):
-        return self.begginning_value, self.ending_value, self.num_periods
+        return self.beginning_value, self.ending_value, self.num_periods
 
     def cagr(self):
         self._cagr_failsafes()
-        return math.pow((self.ending_value / self.begginning_value), (1 / self.num_periods)) - 1
+        return math.pow((self.ending_value / self.beginning_value), (1 / self.num_periods)) - 1
 
     def _cagr_failsafes(self):
-        if self.ending_value == 0 and self.begginning_value == 0:
+        if self.ending_value == 0 and self.beginning_value == 0:
             sys.exit("Investment went from $0 to $0! "
                      "You made no money, from no money.")
-        elif self.begginning_value == 0:
+        elif self.beginning_value == 0:
             sys.exit("Your returns were infinite")
         elif self.num_periods == 0:
             sys.exit("Growth doesn't make sense over 0 periods")
