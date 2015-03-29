@@ -55,9 +55,17 @@ def process_opts():
         elif o == "-s":
             starting_contribution = int(a)
         elif o == "-o":
-            compounding_rate = float(a)
+            if '%' in a:
+                a = a.replace('%', '')
+                compounding_rate = float(a) / 100 + 1
+            else:
+                compounding_rate = float(a)
         elif o == "-i":
-            inflation_rate = float(a)
+            if '%' in a:
+                a = a.replace('%', '')
+                inflation_rate = float(a) / 100 + 1
+            else:
+                inflation_rate = float(a)
         elif o == "-c":
             yearly_contribution = int(a)
         elif o == "-n":
@@ -113,15 +121,21 @@ class CompoundingCalculator(object):
     def print_starting_info(self):
         print("""Assuming:
         A starting contribution of ${:,}
-        An inflation rate of {}
-        A compounding rate of {}
+        An inflation rate of {} ({})
+        A compounding rate of {} ({})
         A yearly contribution of ${:,}
         {} years of contribution
         and {} years till retirement
-            """.format(self.starting_contribution, self.inflation_rate,
-                       self.compounding_rate, self.yearly_contribution,
-                       self.years_of_contribution, self.years_till_retirement))
-        print("    You'll have a net compounding rate of {}\n".format(self.net_compounding_rate))
+            """.format(self.starting_contribution,
+                       self.inflation_rate, to_percent_str(self.inflation_rate),
+                       self.compounding_rate, to_percent_str(self.compounding_rate),
+                       self.yearly_contribution,
+                       self.years_of_contribution,
+                       self.years_till_retirement))
+        print("    You'll have a net compounding rate of {} ({})\n".format(
+            self.net_compounding_rate,
+            to_percent_str(self.net_compounding_rate)
+        ))
 
     def print_money_contributed(self):
         print("")
@@ -140,6 +154,10 @@ class CompoundingCalculator(object):
             years = multiplier_package[1]
             print("    {:5.2f} times if you invest it".format(multiple),
                   "{:2} years after the start of your retirement savings".format(years))
+
+def to_percent_str(num):
+    percent_val = (num - 1.00) * 100
+    return '{:.2f}%'.format(percent_val)
 
 def compound(start, compounding_rate, years_to_compound):
     for _ in range(years_to_compound):
