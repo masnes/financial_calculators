@@ -2,7 +2,7 @@
 Retirement calculator
 By: Michael Asnes
 '''
-import sys, getopt
+import getopt, sys
 
 DEFAULT_INFLATION_RATE = 1.03
 DEFAULT_COMPOUNDING_RATE = 1.10
