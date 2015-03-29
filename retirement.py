@@ -19,8 +19,8 @@ def usage():
     print(''' Usage:
           -h show this help
           -s starting contribution (defaults to {:,})
-          -i (float >= 1.00) inflation rate (defaults to {})
-          -o (float >= 1.00) compounding rate (defaults to {})
+          -i inflation rate (defaults to {}) (float >= 1.00 or 'x%')
+          -o compounding rate (defaults to {}) (float >= 1.00 or 'x%')
           -c yearly contribution (defaults to {:,})
           -n years of contribution (defaults to {})
           -r years till retirement (defaults to {})
