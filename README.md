@@ -5,6 +5,10 @@
  * Net Increase Calculator
  * Retirement Calculator
 
+### Required
+
+All programs require python3 to run.
+
 ### CAGR Calculator
 
 CAGR, or Compounding Annual Growth Rate, is a way to measure how fast
@@ -16,7 +20,7 @@ grew by 7.18% per period. Compounding growth is very powerful!
 Usage:
 
 ```bash
-python cagr.py <Beginning Value> <Ending Value> <Number of Periods>
+$ ./cagr.py <Beginning Value> <Ending Value> <Number of Periods>
 ```
 
 This program works based on the following equation:
@@ -34,7 +38,7 @@ degree of accuracy (should be accurate to +/- 0.01% for most usage cases).
 Usage:
 
 ```bash
-python inputstreamcagr.py <Beginning Value> <Ending Value> <Contribution per period> <Number of Periods>
+$ ./inputstreamcagr.py <Beginning Value> <Ending Value> <Contribution per period> <Number of Periods>
 ```
 
 ### Net Increase Calculator
@@ -45,7 +49,7 @@ periods. For instance if something compounds at a rate of 7% per period for
 
 Usage:
 ```bash
-python net_increase.py <Rate of Increase> <Periods>
+$ ./net_increase.py <Rate of Increase> <Periods>
 ```
 
 ### Retirement Calculator
@@ -57,7 +61,7 @@ parameters can be tweaked as desired.
 To run it (with defaults):
 
 ```bash
-$ python retirement.py
+$ ./retirement.py
 ```
 
 Optional arguments:
