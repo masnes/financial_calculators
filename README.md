@@ -14,7 +14,7 @@ All programs require python3 to run.
 CAGR, or Compounding Annual Growth Rate, is a way to measure how fast
 a contribution has compounded over a given time. For instance, if you
 start with 10,000 of something (money, mice, self-replicating robots,
-etc.) now, and that quantity becomes 20,000 10 periods, then the quantity
+etc.), and that quantity becomes 20,000 over 10 periods, then the quantity
 grew by 7.18% per period. Compounding growth is very powerful!
 
 Usage:
@@ -31,9 +31,10 @@ This program works based on the following equation:
 
 CAGR is simple enough. However, what if you started with 10,000 of something,
 then added an additional amount per year (say 1,000 more). This happens a lot
-with money and retirement accounts. It then becomes much more difficult to
+with money and retirement accounts. CAGR then becomes much more difficult to
 determine. This program will estimate the average yearly return with a high
-degree of accuracy (should be accurate to +/- 0.01% for most usage cases).
+degree of accuracy for such accounts. It should be accurate to +/- 0.01% for
+most usage cases.
 
 Usage:
 
@@ -44,7 +45,7 @@ $ ./inputstreamcagr.py <Beginning Value> <Ending Value> <Contribution per period
 ### Net Increase Calculator
 
 Calculates the multiple of increase given a compounding rate and number of
-periods. For instance if something compounds at a rate of 7% per period for
+periods. For instance, if something compounds at a rate of 7% per period for
 40 periods, it will increase a total of 14.97 times.
 
 Usage:
@@ -54,8 +55,8 @@ $ ./net_increase.py <Rate of Increase> <Periods>
 
 ### Retirement Calculator
 
-This program is an compounding calculator / retirement calculator. It takes in a
-lot of variables described below. It's built with sensible defaults, but all
+This program is an compounding calculator / retirement calculator. It takes in
+a lot of variables described below. It's built with sensible defaults, but all
 parameters can be tweaked as desired.
 
 To run it (with defaults):
