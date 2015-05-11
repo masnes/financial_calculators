@@ -157,6 +157,8 @@ class CompoundingCalculator(object):
                   "{:2} years after the start of your retirement savings".format(years))
 
 def to_percent_str(num):
+    if num <= 0.00:
+        return "-infinity%"
     percent_val = (num - 1.00) * 100
     return '{:.2f}%'.format(percent_val)
 
