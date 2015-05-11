@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Retirement calculator
 By: Michael Asnes

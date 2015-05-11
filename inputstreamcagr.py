@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Compound Annual Growth Rate (CAGR) Calculator with contributions per period
 By: Michael Asnes

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Calculate number of periods required to grow a certain amount at a certain rate
 By: Michael Asnes

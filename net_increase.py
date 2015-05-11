@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Calcate net increase
 By: Michael Asnes
