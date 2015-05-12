@@ -85,17 +85,17 @@ def process_opts():
 
 
 class CompoundingCalculator(object):
-    def __init__(self):
-        (
-            self.starting_contribution,
-            self.inflation_rate,
-            self.compounding_rate,
-            self.yearly_contribution,
-            self.years_of_contribution,
-            self.years_till_retirement,
-            self.show_multipliers,
-            self.num_multipliers
-        ) = process_opts()
+    def __init__(self, starting_contribution, inflation_rate, compounding_rate,
+                 yearly_contribution, years_of_contribution,
+                 years_till_retirement, show_multipliers, num_multipliers):
+        self.starting_contribution = starting_contribution
+        self.inflation_rate = inflation_rate
+        self.compounding_rate = compounding_rate
+        self.yearly_contribution = yearly_contribution
+        self.years_of_contribution = years_of_contribution
+        self.years_till_retirement = years_till_retirement
+        self.show_multipliers = show_multipliers
+        self.num_multipliers = num_multipliers
         self.net_compounding_rate = self.compounding_rate - self.inflation_rate + 1
 
     def get_retirement_funds(self):
@@ -168,13 +168,19 @@ def compound(start, compounding_rate, years_to_compound):
     return start
 
 def main():
-    cc = CompoundingCalculator()
-    cc.print_starting_info()
-    cc.print_money_contributed()
-    cc.print_retirement_amount()
+    (starting_contribution, inflation_rate, compounding_rate,
+     yearly_contribution, years_of_contribution, years_till_retirement,
+     show_multipliers, num_multipliers) = process_opts()
+    calc = CompoundingCalculator(starting_contribution, inflation_rate,
+                                 compounding_rate, yearly_contribution,
+                                 years_of_contribution, years_till_retirement,
+                                 show_multipliers, num_multipliers)
+    calc.print_starting_info()
+    calc.print_money_contributed()
+    calc.print_retirement_amount()
 
-    if cc.show_multipliers:
-        cc.print_multipliers()
+    if calc.show_multipliers:
+        calc.print_multipliers()
 
 
 if __name__ == '__main__':
