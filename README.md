@@ -100,7 +100,7 @@ You will retire with the equivalent of $1,996,351.12 in today's currency
 ##### Run the calculator with some options:
 
 * A starting contribution of $50,000
-* The default inflation rate of 1.03
+* The default inflation rate of 1.03 (no option given)
 * An compounding rate of 1.08 (8%)
 * A yearly contribution of $10,000 (same as the default, but specified in the arguments)
 * 15 years of contribution
