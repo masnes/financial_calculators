@@ -80,21 +80,19 @@ def process_opts():
 
     return (starting_contribution, inflation_rate, compounding_rate,
             yearly_contribution, years_of_contribution, years_till_retirement,
-            show_multipliers, num_multipliers)
+            show_multipliers, num_multipliers, withdraw_rate)
 
 
 class CompoundingCalculator(object):
     def __init__(self, starting_contribution, inflation_rate, compounding_rate,
                  yearly_contribution, years_of_contribution,
-                 years_till_retirement, show_multipliers, num_multipliers):
+                 years_till_retirement):
         self.starting_contribution = starting_contribution
         self.inflation_rate = inflation_rate
         self.compounding_rate = compounding_rate
         self.yearly_contribution = yearly_contribution
         self.years_of_contribution = years_of_contribution
         self.years_till_retirement = years_till_retirement
-        self.show_multipliers = show_multipliers
-        self.num_multipliers = num_multipliers
         self.net_compounding_rate = self.compounding_rate - self.inflation_rate + 1
 
         self.retirement_funds = None
@@ -111,10 +109,10 @@ class CompoundingCalculator(object):
 
         return self.retirement_funds
 
-    def get_multipliers(self):
-        period_length = self.years_of_contribution // (self.num_multipliers-1)
+    def get_multipliers(self, num_multipliers):
+        period_length = self.years_of_contribution // (num_multipliers-1)
         multipliers_list = []
-        for n in range(0, self.num_multipliers):
+        for n in range(0, num_multipliers):
             years_used = n * period_length
             multiplier = compound(1, self.net_compounding_rate, self.years_till_retirement - years_used)
             muliplier_package = (multiplier, years_used)
@@ -124,7 +122,16 @@ class CompoundingCalculator(object):
     def money_contributed(self):
         return (self.yearly_contribution * self.years_of_contribution) + self.starting_contribution
 
+class CalcPrinter(object):
+    def __init__(self, compounding_calculator, show_multipliers,
+                 num_multipliers, withdraw_rate):
+        self.compounding_calc = compounding_calculator
+        self.show_multipliers = show_multipliers
+        self.num_multipliers = num_multipliers
+        self.withdraw_rate = withdraw_rate
+
     def print_starting_info(self):
+        cc = self.compounding_calc
         print("""Assuming:
         A starting contribution of ${:,}
         An inflation rate of {} ({})
@@ -132,28 +139,28 @@ class CompoundingCalculator(object):
         A yearly contribution of ${:,}
         {} years of contribution
         and {} years till retirement
-            """.format(self.starting_contribution,
-                       self.inflation_rate, to_percent_str(self.inflation_rate),
-                       self.compounding_rate, to_percent_str(self.compounding_rate),
-                       self.yearly_contribution,
-                       self.years_of_contribution,
-                       self.years_till_retirement))
+            """.format(cc.starting_contribution,
+                       cc.inflation_rate, self.to_percent_str(cc.inflation_rate),
+                       cc.compounding_rate, self.to_percent_str(cc.compounding_rate),
+                       cc.yearly_contribution,
+                       cc.years_of_contribution,
+                       cc.years_till_retirement))
         print("    You'll have a net compounding rate of {} ({})\n".format(
-            self.net_compounding_rate,
-            to_percent_str(self.net_compounding_rate)
+            cc.net_compounding_rate,
+            self.to_percent_str(cc.net_compounding_rate)
         ))
 
     def print_money_contributed(self):
         print("")
-        print("You will put in a total of ${:,.2f}".format(self.money_contributed()))
+        print("You will put in a total of ${:,.2f}".format(self.compounding_calc.money_contributed()))
 
     def print_retirement_amount(self):
         print("You will retire with the equivalent of",
-              "${:,.2f} in today's currency".format(self.get_retirement_funds()))
+              "${:,.2f} in today's currency".format(self.compounding_calc.get_retirement_funds()))
         print("")
 
     def print_multipliers(self):
-        multipliers_list = self.get_multipliers()
+        multipliers_list = self.compounding_calc.get_multipliers(self.num_multipliers)
         print("Your money will multiply by:")
         for multiplier_package in multipliers_list:
             multiple = multiplier_package[0]
@@ -176,16 +183,18 @@ def main():
     (starting_contribution, inflation_rate, compounding_rate,
      yearly_contribution, years_of_contribution, years_till_retirement,
      show_multipliers, num_multipliers) = process_opts()
+
     calc = CompoundingCalculator(starting_contribution, inflation_rate,
                                  compounding_rate, yearly_contribution,
-                                 years_of_contribution, years_till_retirement,
-                                 show_multipliers, num_multipliers)
-    calc.print_starting_info()
-    calc.print_money_contributed()
-    calc.print_retirement_amount()
+                                 years_of_contribution, years_till_retirement)
+    printer = CalcPrinter(calc, show_multipliers, num_multipliers)
 
-    if calc.show_multipliers:
-        calc.print_multipliers()
+    printer.print_starting_info()
+    printer.print_money_contributed()
+    printer.print_retirement_amount()
+
+    if show_multipliers:
+        printer.print_multipliers()
 
 
 if __name__ == '__main__':
