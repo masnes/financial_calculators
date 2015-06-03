@@ -13,6 +13,7 @@ DEFAULT_YEARS_OF_CONTRIBUTION = 40
 DEFAULT_YEARS_TILL_RETIREMENT = 40
 DEFAULT_SHOW_MULTIPLIERS = False
 DEFAULT_NUM_MULTIPLIERS = 3
+DEFAULT_WITHDRAW_RATE = 0.04
 
 
 def usage():
@@ -27,6 +28,7 @@ def usage():
           -r years till retirement (defaults to {})
           -m show how much your investments multiply over each of
              [num] periods of time over your investment (off by default)
+          -w withdraw rate (4%% is generally considered safe)
           '''.format(DEFAULT_STARTING_CONTRIBUTION, DEFAULT_INFLATION_RATE,
                      DEFAULT_COMPOUNDING_RATE, DEFAULT_YEARLY_CONTRIBUTION,
                      DEFAULT_YEARS_OF_CONTRIBUTION,
@@ -49,6 +51,7 @@ def process_opts():
     years_till_retirement = DEFAULT_YEARS_TILL_RETIREMENT
     show_multipliers = DEFAULT_SHOW_MULTIPLIERS
     num_multipliers = 0
+    withdraw_rate = DEFAULT_WITHDRAW_RATE
     for o, a in opts:
         if o in ("-h", "--help"):
             usage()
@@ -68,6 +71,8 @@ def process_opts():
         elif o == "-m":
             show_multipliers = True
             num_multipliers = int(a)
+        elif o == "-w":
+            withdraw_rate = treat_potential_percent(a)
         else:
             assert False, "unhandled option"
 
@@ -158,6 +163,10 @@ class CalcPrinter(object):
         print("You will retire with the equivalent of",
               "${:,.2f} in today's currency".format(self.compounding_calc.get_retirement_funds()))
         print("")
+        print("At the generally accepted safe withdraw rate of 4%, you'll be able to use\n"
+              "${:,.2f} per year of that money".format(self.compounding_calc.get_retirement_funds() * self.withdraw_rate))
+        print("")
+
 
     def print_multipliers(self):
         multipliers_list = self.compounding_calc.get_multipliers(self.num_multipliers)
@@ -180,14 +189,21 @@ def compound(start, compounding_rate, years_to_compound):
     return start
 
 def main():
-    (starting_contribution, inflation_rate, compounding_rate,
-     yearly_contribution, years_of_contribution, years_till_retirement,
-     show_multipliers, num_multipliers) = process_opts()
+    (starting_contribution,
+     inflation_rate,
+     compounding_rate,
+     yearly_contribution,
+     years_of_contribution,
+     years_till_retirement,
+     show_multipliers,
+     num_multipliers,
+     withdraw_rate) = process_opts()
 
     calc = CompoundingCalculator(starting_contribution, inflation_rate,
                                  compounding_rate, yearly_contribution,
                                  years_of_contribution, years_till_retirement)
-    printer = CalcPrinter(calc, show_multipliers, num_multipliers)
+    printer = CalcPrinter(calc, show_multipliers, num_multipliers,
+                          withdraw_rate)
 
     printer.print_starting_info()
     printer.print_money_contributed()
