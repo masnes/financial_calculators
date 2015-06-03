@@ -56,17 +56,9 @@ def process_opts():
         elif o == "-s":
             starting_contribution = int(a)
         elif o == "-o":
-            if '%' in a:
-                a = a.replace('%', '')
-                compounding_rate = float(a) / 100 + 1
-            else:
-                compounding_rate = float(a)
+            compounding_rate = treat_potential_percent(a)
         elif o == "-i":
-            if '%' in a:
-                a = a.replace('%', '')
-                inflation_rate = float(a) / 100 + 1
-            else:
-                inflation_rate = float(a)
+            inflation_rate = treat_potential_percent(a)
         elif o == "-c":
             yearly_contribution = int(a)
         elif o == "-n":
@@ -78,6 +70,13 @@ def process_opts():
             num_multipliers = int(a)
         else:
             assert False, "unhandled option"
+
+    def treat_potential_percent(arg):
+        if '%' in arg:
+            arg = arg.replace('%', '')
+            return float(arg) / 100 + 1
+        else:
+            return float(arg)
 
     return (starting_contribution, inflation_rate, compounding_rate,
             yearly_contribution, years_of_contribution, years_till_retirement,
