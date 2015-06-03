@@ -97,13 +97,19 @@ class CompoundingCalculator(object):
         self.num_multipliers = num_multipliers
         self.net_compounding_rate = self.compounding_rate - self.inflation_rate + 1
 
+        self.retirement_funds = None
+
     def get_retirement_funds(self):
-        compound = self.starting_contribution
-        for i in range(0, self.years_till_retirement):
-            compound *= self.net_compounding_rate
-            if i < self.years_of_contribution:
-                compound += self.yearly_contribution
-        return compound
+        if self.retirement_funds is None:
+            compound = self.starting_contribution
+            for i in range(0, self.years_till_retirement):
+                compound *= self.net_compounding_rate
+                if i < self.years_of_contribution:
+                    compound += self.yearly_contribution
+
+            self.retirement_funds = compound
+
+        return self.retirement_funds
 
     def get_multipliers(self):
         period_length = self.years_of_contribution // (self.num_multipliers-1)
